@@ -131,12 +131,12 @@ GROUP BY SoldAsVacant
 ORDER BY 2
 
 SELECT 
-    SoldAsVacant,
-    CASE
-        WHEN SoldAsVacant = 'Y' THEN 'YES'
-        WHEN SoldAsVacant = 'N' THEN 'NO'
-        ELSE SoldAsVacant
-    END
+  SoldAsVacant,
+  CASE
+      WHEN SoldAsVacant = 'Y' THEN 'YES'
+      WHEN SoldAsVacant = 'N' THEN 'NO'
+      ELSE SoldAsVacant
+  END
 FROM
     nashvillehousing.datacleaning
 
@@ -155,16 +155,16 @@ SET
 
 WITH RowNumCTE AS
 (SELECT *,
-		ROW_NUMBER() OVER (
+	ROW_NUMBER() OVER (
         PARTITION BY 
-				ParcelID,
-				PropertyAddress,
-				SalePrice,
-				SaleDate,
-				LegalReference
+		ParcelID,
+		PropertyAddress,
+		SalePrice,
+		SaleDate,
+		LegalReference
                 ORDER BY
-					UniqueID
-                    ) row_num
+		UniqueID
+                ) row_num
 FROM nashvillehousing.datacleaning
 )
 DELETE FROM RowNumCTE
